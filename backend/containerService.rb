@@ -1,10 +1,16 @@
 require 'docker'
 
 
-'deae7abef717'
-container = Docker::Container.create('Image' => 'blankblank/razorchess')
-container.start
-#containerService class?
+
+def container_exists(container_id)
+  Docker::Container.get(container_id)
+  return true
+  rescue
+    return false
+end
+
+
+
 class ContainerService
 
   #docker info
@@ -12,7 +18,25 @@ class ContainerService
   def create_container
     #This method should create and provision a new container for the user.
     #We will return the id of the newly created container
-    puts 'todo: implement this method'
+  
+     
+  image_name = 'blankblank/razorchess'
+
+  container = Docker::Container.create(
+    'Image' => image_name,
+    'Tty' => true,
+    'ExposedPorts' => { '8081/tcp' => {} },
+    'HostConfig' => {
+      'PortBindings' => {
+        '8081/tcp' => [{ 'HostPort' => '8081' }]
+      }
+    }
+  )
+  container.start
+
+  container_id = container.id
+  return container_id 
+
   end
   #delete container
   #update container
@@ -20,4 +44,5 @@ class ContainerService
   
 end
 
-
+#cs = ContainerService.new
+#cs.create_container
