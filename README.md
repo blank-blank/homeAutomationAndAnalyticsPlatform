@@ -4,14 +4,27 @@ A minimal compute, analytics, and automation platform for personal residences
 The platform will provide a Self service API.  A user should be able to do the following:
 
 
+
+ContainerService:
+
+  api:
+    create_container:
+      description: supporting service that allows creation/deletion of docker containers meant for development/task/service/analytics platforms.
+      params:
+        image_id -> name of the docker image for the container
+     
+      returns:
+        hash:
+          container_id
+          
+
+  
 Needs-driven MVP: 
     create a server on demand
        require 'containerService'
        cs = ContainerService.new
        cs.create_container
-        
-       Will create and run a hard-coded docker image.
-       TODO: parameterize this function and put it behind a service
+       ~~Will create and run a hard-coded docker image.~~  Takes a params hash: image_name
        
 
   
