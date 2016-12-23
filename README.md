@@ -1,3 +1,10 @@
+getting started:
+
+git clone <url>
+cd lilypad
+bundle install
+
+
 # homeAutomationAndAnalyticsPlatform
 A minimal compute, analytics, and automation platform for personal residences
 
